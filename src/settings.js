@@ -1,11 +1,11 @@
 export const settings = {
     site: {
-        siteUrl: "https://domain-kamu.com",
+        siteUrl: "https://linktree-website-simple.vercel.app/",
         title: "Nimzz - Linktree",
         description: "Official Links & Profile of Nimzz",
         favicon: "/favicon.ico"
     },
-    profile: {
+    profile: {!
         name: "@Nimzz",
         bio: "Web Developer | Tech Enthusiast",
         avatar: "/avatar.jpg",
