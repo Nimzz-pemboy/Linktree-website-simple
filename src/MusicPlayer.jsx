@@ -36,12 +36,12 @@ const MusicPlayer = () => {
     return (
         <>
             <motion.button 
-                className="fab-btn"
+                className={`fab-btn ${isPlaying ? 'playing-pulse' : ''}`}
                 onClick={() => setIsOpen(!isOpen)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
             >
-                <i className="fa-solid fa-music"></i>
+                <i className={`fa-solid ${isPlaying ? 'fa-compact-disc fa-spin' : 'fa-music'}`}></i>
             </motion.button>
 
             <AnimatePresence>
@@ -54,7 +54,7 @@ const MusicPlayer = () => {
                         transition={{ duration: 0.3 }}
                     >
                         <div className="music-header">
-                            <img src={settings.music.cover} alt="Cover Lagu" className="music-cover" />
+                            <img src={settings.music.cover} alt="Cover" className="music-cover" />
                             <div className="music-info">
                                 <h3>{settings.music.title}</h3>
                                 <p>{settings.music.artist}</p>
@@ -76,7 +76,7 @@ const MusicPlayer = () => {
                             <div className="progress-bar">
                                 <div 
                                     className="progress-fill" 
-                                    style={{ width: `${(currentTime / duration) * 100}%` }}
+                                    style={{ width: `${(duration > 0 ? (currentTime / duration) * 100 : 0)}%` }}
                                 ></div>
                             </div>
                             <span>{formatTime(duration)}</span>
@@ -89,17 +89,17 @@ const MusicPlayer = () => {
                                 <><i className="fa-solid fa-play" style={{ marginRight: '8px' }}></i> Play</>
                             )}
                         </button>
-
-                        <audio 
-                            ref={audioRef} 
-                            src={settings.music.audio} 
-                            onTimeUpdate={handleTimeUpdate}
-                            onLoadedMetadata={handleLoadedMetadata}
-                            onEnded={() => setIsPlaying(false)}
-                        />
                     </motion.div>
                 )}
             </AnimatePresence>
+            
+            <audio 
+                ref={audioRef} 
+                src={settings.music.audio} 
+                onTimeUpdate={handleTimeUpdate}
+                onLoadedMetadata={handleLoadedMetadata}
+                onEnded={() => setIsPlaying(false)}
+            />
         </>
     );
 };
